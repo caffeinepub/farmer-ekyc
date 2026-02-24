@@ -1,0 +1,21 @@
+{
+  "frontend/src/App.tsx": "Main application router with TanStack Router; defines all routes for agent and manager flows with session-based guards, redirecting unauthenticated users to appropriate login pages.",
+  "frontend/src/hooks/useQueries.ts": "All React Query hooks for backend canister calls; uses `as unknown as BackendAgent[]` casts in queryFn return types to resolve the `@dfinity/agent` vs `src/backend` Agent type name collision.",
+  "frontend/src/pages/AgentLogin.tsx": "Agent login page with two tabs (Agent ID+OTP and Phone+Password); uses the correct `useAgentLoginMutation` and `useAgentLoginWithPhoneMutation` hooks, passes all required `AgentSession` fields (including mobile and email), and navigates to the correct `/agent-signup` route.",
+  "frontend/src/pages/ManagerDashboard.tsx": "Manager dashboard using the correct `useAgentListQuery` and `useApplicationListQuery` hooks with `getStatusString` for status filtering; navigates to `/manager/farmer-approval` (correct route).",
+  "frontend/src/pages/AgentApproval.tsx": "Manager agent approval page using the correct `useAgentListQuery` and `useUpdateAgentStatusMutation` hooks; passes `status` as `AgentStatusType` string directly to the mutation.",
+  "frontend/src/pages/FarmerApplicationApproval.tsx": "Manager farmer application approval page using the correct `useApplicationListQuery` and `useUpdateApplicationStatusMutation` hooks; passes `status` as `ApplicationStatusType` string directly to the mutation.",
+  "frontend/src/lib/auth.ts": "Session management utilities using sessionStorage for agent and manager sessions; includes password hashing and agent ID generation helpers.",
+  "frontend/src/pages/ManagerLogin.tsx": "Two-step manager login using the correct `useRequestManagerOtpMutation` and `useVerifyManagerOtpMutation` hooks; saves session via `saveManagerSession({ token, email })` with the correct shape.",
+  "frontend/src/pages/AgentSignup.tsx": "Agent self-registration form using the correct `useRegisterAgentMutation` hook; shows a success card with the generated Agent ID and navigates to `/agent-login` (correct route).",
+  "frontend/src/pages/AgentDashboard.tsx": "Agent dashboard with green welcome banner, amber agent ID display, and two action cards (Submit eKYC in green, Check Status in amber) with colorful icon backgrounds.",
+  "frontend/src/pages/CheckApplicationStatus.tsx": "Application status lookup page using the correct `useGetApplicationByAckNumberQuery` hook name with `getStatusString` for status resolution.",
+  "frontend/src/pages/SubmitFarmerEKYC.tsx": "Farmer eKYC submission form using the correct `useSubmitFarmerApplicationMutation` hook with all required fields.",
+  "frontend/src/lib/utils.ts": "Utility helpers including cn for class merging and formatDate/formatDateTime that accept both bigint (nanoseconds from backend) and number timestamps.",
+  "frontend/src/pages/CreateAgentAccount.tsx": "Manager form to create pre-approved agent accounts using the correct `useCreateAgentByManagerMutation` hook.",
+  "frontend/src/components/Layout.tsx": "Shared layout with a rich earthy-green sticky header featuring an amber logo icon, user role badge, and logout button; wraps all authenticated pages with consistent navigation and a branded footer.",
+  "frontend/src/pages/AcknowledgmentScreen.tsx": "Acknowledgment screen with green success header band, amber acknowledgment number display box, copy button, and amber/green action buttons.",
+  "frontend/src/index.css": "Global styles with vivid OKLCH earthy green (primary) and warm amber (accent) color tokens for both light and dark modes, including `--warning`, `--success`, and all semantic tokens needed by the app.",
+  "frontend/tailwind.config.js": "Tailwind configuration mapping all CSS custom property tokens (primary, accent, success, warning, destructive, muted, etc.) to Tailwind utility classes using direct `var()` references, with Poppins/Inter fonts and card shadow tokens.",
+  "frontend/src/components/StatusBadge.tsx": "Status badge component using vivid inline Tailwind color classes (amber for pending, emerald for approved, red for rejected) without relying on CSS custom property tokens."
+}

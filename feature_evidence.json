@@ -1,0 +1,56 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-restore-the-earthy-green-and-warm-amber-color-palette-across-all-frontend-pages-every-screen-agentsignup-agentlogin-agentdashboard-submitfarmerekyc-acknowledgmentscreen-checkapplicationstatus-managerlogin-managerdashboard-agentapproval-farmerapplicationapproval-and-createagentaccount-must-use-rich-saturated-earthy-greens-e-g-deep-forest-green-olive-sage-and-warm-ambers-e-g-golden-yellow-burnt-orange-honey-as-primary-and-accent-colors-buttons-headers-cards-badges-navigation-bar-form-labels-and-status-indicators-must-all-reflect-this-vibrant-palette-the-app-must-look-colorful-and-visually-rich-not-muted-or-monochrome",
+      "featureTitle": "Restore the earthy green and warm amber color palette across all frontend pages. Every screen — AgentSignup, AgentLogin, AgentDashboard, SubmitFarmerEKYC, AcknowledgmentScreen, CheckApplicationStatus, ManagerLogin, ManagerDashboard, AgentApproval, FarmerApplicationApproval, and CreateAgentAccount — must use rich, saturated earthy greens (e.g. deep forest green, olive, sage) and warm ambers (e.g. golden yellow, burnt orange, honey) as primary and accent colors. Buttons, headers, cards, badges, navigation bar, form labels, and status indicators must all reflect this vibrant palette. The app must look colorful and visually rich, not muted or monochrome.",
+      "files": [
+        "frontend/src/components/Layout.tsx",
+        "frontend/src/components/StatusBadge.tsx",
+        "frontend/src/pages/AcknowledgmentScreen.tsx",
+        "frontend/src/pages/AgentApproval.tsx",
+        "frontend/src/pages/AgentDashboard.tsx",
+        "frontend/src/pages/AgentLogin.tsx",
+        "frontend/src/pages/AgentSignup.tsx",
+        "frontend/src/pages/CheckApplicationStatus.tsx",
+        "frontend/src/pages/CreateAgentAccount.tsx",
+        "frontend/src/pages/FarmerApplicationApproval.tsx",
+        "frontend/src/pages/ManagerDashboard.tsx",
+        "frontend/src/pages/ManagerLogin.tsx",
+        "frontend/src/pages/SubmitFarmerEKYC.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-35"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-update-frontend-src-index-css-and-frontend-tailwind-config-js-to-define-vivid-saturated-oklch-or-hsl-color-token-values-for-the-earthy-green-primary-and-warm-amber-accent-palette-ensure-that-css-custom-properties-map-to-rich-distinguishable-colors-not-near-white-or-near-grey-variants-so-that-all-pages-inheriting-these-tokens-appear-colorful",
+      "featureTitle": "Update `frontend/src/index.css` and `frontend/tailwind.config.js` to define vivid, saturated OKLCH or HSL color token values for the earthy green (primary) and warm amber (accent) palette. Ensure that CSS custom properties map to rich, distinguishable colors (not near-white or near-grey variants) so that all pages inheriting these tokens appear colorful.",
+      "files": [
+        "frontend/src/index.css",
+        "frontend/tailwind.config.js"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-36"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

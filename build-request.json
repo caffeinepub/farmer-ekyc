@@ -1,0 +1,65 @@
+{
+  "kind": "build_request",
+  "title": "Restore colorful earthy green and warm amber visual theme",
+  "projectName": "Farmer EKYC",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-35",
+      "text": "Restore the earthy green and warm amber color palette across all frontend pages. Every screen — AgentSignup, AgentLogin, AgentDashboard, SubmitFarmerEKYC, AcknowledgmentScreen, CheckApplicationStatus, ManagerLogin, ManagerDashboard, AgentApproval, FarmerApplicationApproval, and CreateAgentAccount — must use rich, saturated earthy greens (e.g. deep forest green, olive, sage) and warm ambers (e.g. golden yellow, burnt orange, honey) as primary and accent colors. Buttons, headers, cards, badges, navigation bar, form labels, and status indicators must all reflect this vibrant palette. The app must look colorful and visually rich, not muted or monochrome.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "make it colourfull like befor"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The top navigation bar uses a rich earthy green background with contrasting amber or white text.",
+        "Primary action buttons use saturated green or amber fill colors, not grey or white.",
+        "Card containers have visible colored borders or colored header bands using the green/amber palette.",
+        "Status badges (Pending, Approved, Rejected) are rendered in distinct, vivid colors (e.g. amber for pending, green for approved, red for rejected).",
+        "Form field focus states and labels use green or amber accent colors.",
+        "The Manager Dashboard stat cards use colorful backgrounds or colored icons from the earthy green/amber palette.",
+        "All pages are visually consistent with each other using the same color tokens.",
+        "No page appears grey, white-only, or colorless."
+      ]
+    },
+    {
+      "id": "REQ-36",
+      "text": "Update `frontend/src/index.css` and `frontend/tailwind.config.js` to define vivid, saturated OKLCH or HSL color token values for the earthy green (primary) and warm amber (accent) palette. Ensure that CSS custom properties map to rich, distinguishable colors (not near-white or near-grey variants) so that all pages inheriting these tokens appear colorful.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "make it colourfull like befor"
+        ]
+      },
+      "acceptanceCriteria": [
+        "`--primary` or equivalent CSS token resolves to a deep, saturated green visible on white backgrounds.",
+        "`--accent` or equivalent CSS token resolves to a vivid amber/golden color.",
+        "Tailwind config extends theme with these tokens so utility classes like `bg-primary`, `text-accent`, `border-primary` produce colorful results.",
+        "Dark-mode tokens (if defined) also use saturated variants of the same palette."
+      ]
+    }
+  ],
+  "constraints": [
+    "Do not modify any files under frontend/src/hooks/useActor.ts, frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/main.tsx, or frontend/src/components/ui.",
+    "Do not change any backend logic or data structures.",
+    "Do not alter any existing functional behavior — only visual/styling changes are permitted."
+  ],
+  "nonGoals": [
+    "Adding new pages or features.",
+    "Changing authentication flows or backend API calls.",
+    "Introducing a new color palette other than earthy green and warm amber.",
+    "Modifying the backend (main.mo)."
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  }
+}

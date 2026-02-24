@@ -1,0 +1,412 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 23,
+  "summary": "Farmer EKYC is an office-use front-end app for agent-based farmer eKYC registration. Agents sign up (pending until manager approval), log in using OTP (fixed as '696900') by entering their Agent ID, fill farmer eKYC forms, upload documents, receive instant 14-digit acknowledgment numbers on submission, and can track application status. Managers approve/reject agent accounts and farmer applications. Manager login uses OTP-based authentication with a fixed email (sansubasu34@gmail.com) and single-session enforcement.",
+  "architectural_notes": [
+    "Two user roles: Agent and Manager, each with distinct screens and permissions",
+    "Agent accounts start in pending status after signup; manager must approve before login is allowed",
+    "14-digit random acknowledgment number generated instantly on farmer form submission",
+    "Application status tracked via acknowledgment number with states: Pending, Approved, Rejected",
+    "Manager login uses OTP authentication with fixed email sansubasu34@gmail.com; only one active manager session allowed at a time",
+    "Manager OTP is hardcoded as '123456' and must never be displayed on screen",
+    "Agent login uses OTP authentication: agent enters their Agent ID and a fixed OTP '696900'; OTP must never be displayed on screen",
+    "Agent login supports two methods: (1) Agent ID + OTP ('696900'), and (2) Phone Number + Password",
+    "Manager can create Agent (AID) accounts directly from the manager panel, in addition to agents self-registering via signup"
+  ],
+  "known_issues": [
+    "Agent signups from a different device are not visible in the manager's agent approval list (cross-device data visibility issue)"
+  ],
+  "isFixRequest": false,
+  "existing_features": [
+    {
+      "id": "feature-build-an-agent-signup-screen-with-fields-full-name-mobile-number-email-password-confirm-password-on-submission-create-the-agent-account-with-status-pending-and-show-a-message-your-account-has-been-submitted-for-approval-please-wait-for-manager-approval-before-logging-in",
+      "title": "Build an Agent Signup screen with fields: Full Name, Mobile Number, Email, Password, Confirm Password. On submission, create the agent account with status=pending and show a message: 'Your account has been submitted for approval. Please wait for manager approval before logging in.'",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-an-agent-login-screen-with-fields-email-and-password-if-the-agent-s-status-is-pending-show-your-account-is-pending-manager-approval-if-rejected-show-your-account-has-been-rejected-only-allow-login-if-status-is-approved-include-a-link-to-the-manager-login",
+      "title": "Build an Agent Login screen with fields: Email and Password. If the agent's status is pending, show: 'Your account is pending manager approval.' If rejected, show: 'Your account has been rejected.' Only allow login if status is approved. Include a link to the Manager Login.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-an-agent-dashboard-screen-that-shows-a-welcome-message-with-the-agent-s-name-and-provides-navigation-options-submit-new-farmer-ekyc-check-application-status-and-logout",
+      "title": "Build an Agent Dashboard screen that shows a welcome message with the agent's name and provides navigation options: Submit New Farmer EKYC, Check Application Status, and Logout.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-a-farmer-ekyc-form-screen-with-the-following-fields-farmer-name-mobile-number-address-street-city-state-pincode-aadhaar-number-pan-number-and-any-other-relevant-details-include-a-document-upload-section-allowing-the-agent-to-attach-files-for-identity-proof-address-proof-and-supporting-documents-each-as-a-file-input-on-submission-call-the-backend-to-store-the-application-and-return-a-14-digit-acknowledgment-number",
+      "title": "Build a Farmer EKYC Form screen with the following fields: Farmer Name, Mobile Number, Address (street, city, state, pincode), Aadhaar Number, PAN Number, and any other relevant details. Include a document upload section allowing the agent to attach files for: Identity Proof, Address Proof, and Supporting Documents (each as a file input). On submission, call the backend to store the application and return a 14-digit acknowledgment number.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-an-acknowledgment-screen-that-is-displayed-immediately-after-successful-farmer-ekyc-form-submission-it-must-prominently-display-the-generated-14-digit-acknowledgment-number-e-g-acknowledgment-number-48392017456382-a-success-message-and-a-button-to-return-to-the-agent-dashboard",
+      "title": "Build an Acknowledgment Screen that is displayed immediately after successful Farmer EKYC form submission. It must prominently display the generated 14-digit acknowledgment number (e.g., 'Acknowledgment Number: 48392017456382'), a success message, and a button to return to the Agent Dashboard.",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-an-application-status-check-screen-where-an-agent-can-enter-an-acknowledgment-number-and-view-the-current-status-of-that-application-display-the-status-as-pending-approved-or-rejected-along-with-basic-application-details-farmer-name-submission-date",
+      "title": "Build an Application Status Check screen where an agent can enter an acknowledgment number and view the current status of that application. Display the status as: Pending, Approved, or Rejected, along with basic application details (farmer name, submission date).",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-a-manager-login-screen-separate-from-the-agent-login-screen-the-manager-uses-hardcoded-credentials-stored-in-the-backend-on-successful-login-redirect-to-the-manager-dashboard",
+      "title": "Build a Manager Login screen separate from the Agent Login screen. The manager uses hardcoded credentials stored in the backend. On successful login, redirect to the Manager Dashboard.",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-a-manager-dashboard-screen-that-shows-summary-counts-total-agents-pending-approval-total-farmer-applications-pending-review-and-provides-navigation-to-agent-approval-screen-farmer-application-approval-screen-and-logout",
+      "title": "Build a Manager Dashboard screen that shows summary counts (total agents pending approval, total farmer applications pending review) and provides navigation to: Agent Approval screen, Farmer Application Approval screen, and Logout.",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-an-agent-approval-screen-for-the-manager-that-lists-all-agent-signup-requests-with-their-details-name-mobile-email-signup-date-current-status-each-entry-has-approve-and-reject-action-buttons-after-an-action-the-list-updates-to-reflect-the-new-status",
+      "title": "Build an Agent Approval screen for the manager that lists all agent signup requests with their details (name, mobile, email, signup date, current status). Each entry has Approve and Reject action buttons. After an action, the list updates to reflect the new status.",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-a-farmer-application-approval-screen-for-the-manager-that-lists-all-submitted-farmer-ekyc-applications-with-their-details-acknowledgment-number-farmer-name-agent-name-submission-date-status-clicking-an-application-opens-a-detail-view-showing-all-farmer-details-uploaded-document-names-and-approve-reject-buttons",
+      "title": "Build a Farmer Application Approval screen for the manager that lists all submitted Farmer EKYC applications with their details (acknowledgment number, farmer name, agent name, submission date, status). Clicking an application opens a detail view showing all farmer details, uploaded document names, and Approve/Reject buttons.",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-apply-a-consistent-professional-visual-theme-across-all-screens-use-an-earthy-green-and-warm-amber-color-palette-reflecting-an-agricultural-rural-context-use-clean-spacious-layouts-with-clear-section-headings-card-based-content-containers-and-a-top-navigation-bar-showing-the-app-name-farmer-ekyc-and-the-logged-in-user-s-role-typography-should-be-readable-and-formal-suitable-for-office-use",
+      "title": "Apply a consistent, professional visual theme across all screens: use an earthy green and warm amber color palette reflecting an agricultural/rural context. Use clean, spacious layouts with clear section headings, card-based content containers, and a top navigation bar showing the app name 'Farmer EKYC' and the logged-in user's role. Typography should be readable and formal, suitable for office use.",
+      "reqIds": [
+        "REQ-12"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-replace-the-manager-login-page-managerlogin-tsx-with-a-two-step-otp-flow-step-1-shows-an-email-input-pre-filled-with-sansubasu34-gmail-com-and-a-send-otp-button-step-2-shows-a-6-digit-otp-input-and-a-verify-otp-button-after-successful-otp-verification-the-manager-is-redirected-to-the-manager-dashboard-display-clear-error-messages-for-wrong-email-invalid-otp-or-expired-otp-if-a-manager-session-is-already-active-show-a-notice-that-the-previous-session-has-been-invalidated",
+      "title": "Replace the Manager Login page (ManagerLogin.tsx) with a two-step OTP flow: Step 1 shows an email input pre-filled with 'sansubasu34@gmail.com' and a 'Send OTP' button; Step 2 shows a 6-digit OTP input and a 'Verify OTP' button. After successful OTP verification the manager is redirected to the Manager Dashboard. Display clear error messages for wrong email, invalid OTP, or expired OTP. If a manager session is already active, show a notice that the previous session has been invalidated.",
+      "reqIds": [
+        "REQ-14"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-manager-login-page-managerlogin-tsx-so-that-the-otp-value-is-never-displayed-anywhere-on-screen-remove-any-ui-element-helper-text-toast-alert-or-debug-label-that-reveals-the-current-otp-to-the-user",
+      "title": "Update the Manager Login page (ManagerLogin.tsx) so that the OTP value is never displayed anywhere on screen. Remove any UI element, helper text, toast, alert, or debug label that reveals the current OTP to the user.",
+      "reqIds": [
+        "REQ-16"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-fix-the-manager-dashboard-stats-cards-total-agents-agents-pending-total-applications-apps-pending-so-they-display-actual-numeric-counts-instead-of-empty-loading-placeholder-boxes-the-frontend-query-hooks-in-usequeries-ts-that-fetch-agent-and-application-lists-must-correctly-parse-the-backend-response-and-pass-populated-counts-to-the-dashboard-cards",
+      "title": "Fix the Manager Dashboard stats cards (Total Agents, Agents Pending, Total Applications, Apps Pending) so they display actual numeric counts instead of empty/loading placeholder boxes. The frontend query hooks in `useQueries.ts` that fetch agent and application lists must correctly parse the backend response and pass populated counts to the dashboard cards.",
+      "reqIds": [
+        "REQ-18"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-fix-the-agentapproval-tsx-page-and-the-relevant-react-query-hook-in-usequeries-ts-so-that-the-agent-list-query-correctly-parses-the-backend-response-and-displays-all-agents-including-newly-registered-pending-agents-ensure-the-query-is-invalidated-refetched-after-any-approve-or-reject-action-so-the-list-stays-up-to-date",
+      "title": "Fix the `AgentApproval.tsx` page and the relevant React Query hook in `useQueries.ts` so that the agent list query correctly parses the backend response and displays all agents (including newly registered pending agents). Ensure the query is invalidated/refetched after any approve or reject action so the list stays up to date.",
+      "reqIds": [
+        "REQ-20"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-refactor-the-frontend-to-remove-all-localstorage-sessionstorage-usage-for-storing-agent-accounts-and-farmer-ekyc-applications-all-agent-signup-agent-login-application-submission-and-application-status-queries-must-call-the-backend-canister-methods-exclusively-the-frontend-should-no-longer-act-as-the-source-of-truth-for-agent-or-application-data",
+      "title": "Refactor the frontend to remove all localStorage/sessionStorage usage for storing agent accounts and farmer eKYC applications. All agent signup, agent login, application submission, and application status queries must call the backend canister methods exclusively. The frontend should no longer act as the source of truth for agent or application data.",
+      "reqIds": [
+        "REQ-22"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-replace-the-agent-login-page-frontend-src-pages-agentlogin-tsx-with-a-new-two-field-otp-login-form-step-1-display-a-single-input-for-agent-id-and-a-single-input-for-otp-6-digit-type-password-or-text-on-submission-call-the-backend-agentlogin-function-with-the-agent-id-and-otp-on-success-save-the-agent-session-and-navigate-to-the-agent-dashboard-display-appropriate-error-messages-for-agent-not-found-account-pending-approval-account-rejected-or-incorrect-otp-remove-all-email-and-password-fields-the-otp-value-696900-must-never-be-displayed-hinted-or-pre-filled-on-the-screen",
+      "title": "Replace the Agent Login page (`frontend/src/pages/AgentLogin.tsx`) with a new two-field OTP login form. Step 1: Display a single input for 'Agent ID' and a single input for 'OTP' (6-digit, type password or text). On submission, call the backend `agentLogin` function with the Agent ID and OTP. On success, save the agent session and navigate to the Agent Dashboard. Display appropriate error messages for: agent not found, account pending approval, account rejected, or incorrect OTP. Remove all email and password fields. The OTP value '696900' must never be displayed, hinted, or pre-filled on the screen.",
+      "reqIds": [
+        "REQ-25"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-useagentloginmutation-hook-or-equivalent-in-frontend-src-hooks-usequeries-ts-to-call-the-backend-agentlogin-function-with-agent-id-and-otp-parameters-instead-of-email-and-password-ensure-the-session-is-saved-using-saveagentsession-from-frontend-src-lib-auth-ts-on-a-successful-response-matching-the-existing-session-structure",
+      "title": "Update the `useAgentLoginMutation` hook (or equivalent) in `frontend/src/hooks/useQueries.ts` to call the backend `agentLogin` function with Agent ID and OTP parameters instead of email and password. Ensure the session is saved using `saveAgentSession` from `frontend/src/lib/auth.ts` on a successful response, matching the existing session structure.",
+      "reqIds": [
+        "REQ-26"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-agent-login-page-frontend-src-pages-agentlogin-tsx-and-the-relevant-hook-in-frontend-src-hooks-usequeries-ts-to-add-a-second-login-mode-login-with-phone-number-the-page-must-present-a-toggle-or-tab-to-switch-between-the-existing-agent-id-otp-login-and-a-new-phone-number-password-login-the-phone-password-form-must-have-a-phone-number-input-and-a-password-input-type-password-on-submission-call-the-backend-phone-number-login-function-on-success-save-the-agent-session-using-saveagentsession-from-frontend-src-lib-auth-ts-and-navigate-to-the-agent-dashboard-display-appropriate-error-messages-for-agent-not-found-account-pending-approval-account-rejected-or-incorrect-password-the-password-value-prasanta-2026-must-never-be-displayed-hinted-or-pre-filled-on-the-screen",
+      "title": "Update the Agent Login page (`frontend/src/pages/AgentLogin.tsx`) and the relevant hook in `frontend/src/hooks/useQueries.ts` to add a second login mode: 'Login with Phone Number'. The page must present a toggle or tab to switch between the existing 'Agent ID + OTP' login and a new 'Phone Number + Password' login. The phone/password form must have a phone number input and a password input (type password). On submission, call the backend phone-number login function. On success, save the agent session using `saveAgentSession` from `frontend/src/lib/auth.ts` and navigate to the Agent Dashboard. Display appropriate error messages for: agent not found, account pending approval, account rejected, or incorrect password. The password value 'PRASANTA@2026' must never be displayed, hinted, or pre-filled on the screen.",
+      "reqIds": [
+        "REQ-28"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-create-agent-account-section-or-modal-to-the-manager-dashboard-frontend-src-pages-managerdashboard-tsx-or-a-new-page-frontend-src-pages-createagentaccount-tsx-the-ui-must-include-a-form-with-fields-full-name-mobile-number-email-and-password-on-submission-call-the-backend-createagentbymanager-function-on-success-prominently-display-the-generated-agent-id-aid-and-the-credentials-name-mobile-email-so-the-manager-can-share-them-with-the-agent-include-a-copy-agent-id-button-display-appropriate-error-messages-for-duplicate-mobile-email-or-missing-fields",
+      "title": "Add a 'Create Agent Account' section or modal to the Manager Dashboard (`frontend/src/pages/ManagerDashboard.tsx` or a new page `frontend/src/pages/CreateAgentAccount.tsx`). The UI must include a form with fields: Full Name, Mobile Number, Email, and Password. On submission, call the backend `createAgentByManager` function. On success, prominently display the generated Agent ID (AID) and the credentials (name, mobile, email) so the manager can share them with the agent. Include a 'Copy Agent ID' button. Display appropriate error messages for duplicate mobile/email or missing fields.",
+      "reqIds": [
+        "REQ-30"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-usecreateagentbymanagermutation-hook-in-frontend-src-hooks-usequeries-ts-that-calls-the-backend-createagentbymanager-function-with-the-form-fields-name-mobile-email-password-on-success-invalidate-the-agent-list-query-so-the-manager-dashboard-stats-and-agent-approval-list-refresh-automatically",
+      "title": "Add a `useCreateAgentByManagerMutation` hook in `frontend/src/hooks/useQueries.ts` that calls the backend `createAgentByManager` function with the form fields (name, mobile, email, password). On success, invalidate the agent list query so the Manager Dashboard stats and Agent Approval list refresh automatically.",
+      "reqIds": [
+        "REQ-31"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-rebuild-all-frontend-pages-and-hooks-ensuring-they-call-the-backend-canister-exclusively-no-localstorage-sessionstorage-for-data-all-pages-must-be-consistent-with-the-earthy-green-and-warm-amber-visual-theme-pages-to-rebuild-agentsignup-agentlogin-agent-id-otp-tab-and-phone-password-tab-agentdashboard-submitfarmerekyc-acknowledgmentscreen-checkapplicationstatus-managerlogin-two-step-otp-flow-otp-never-displayed-managerdashboard-correct-stats-counts-agentapproval-list-refreshes-after-approve-reject-farmerapplicationapproval-createagentaccount-manager-creates-agent-displays-generated-aid-with-copy-button",
+      "title": "Rebuild all frontend pages and hooks ensuring they call the backend canister exclusively (no localStorage/sessionStorage for data). All pages must be consistent with the earthy green and warm amber visual theme. Pages to rebuild: AgentSignup, AgentLogin (Agent ID+OTP tab and Phone+Password tab), AgentDashboard, SubmitFarmerEKYC, AcknowledgmentScreen, CheckApplicationStatus, ManagerLogin (two-step OTP flow, OTP never displayed), ManagerDashboard (correct stats counts), AgentApproval (list refreshes after approve/reject), FarmerApplicationApproval, CreateAgentAccount (manager creates agent, displays generated AID with copy button).",
+      "reqIds": [
+        "REQ-33"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-rebuild-the-frontend-src-hooks-usequeries-ts-file-to-correctly-implement-all-react-query-hooks-useagentlistquery-parses-backend-response-correctly-useapplicationlistquery-useagentloginmutation-agent-id-otp-useagentloginwithphonemutation-phone-password-usecreateagentbymanagermutation-invalidates-agent-list-on-success-useregisteragentmutation-usesubmitfarmerapplicationmutation-useupdateagentstatusmutation-invalidates-agent-list-on-success-useupdateapplicationstatusmutation-invalidates-application-list-on-success-usemanagerotpmutation-useverifymanagerotpmutation-usegetapplicationbyacknumberquery-all-hooks-must-correctly-parse-backend-variant-option-responses",
+      "title": "Rebuild the `frontend/src/hooks/useQueries.ts` file to correctly implement all React Query hooks: `useAgentListQuery` (parses backend response correctly), `useApplicationListQuery`, `useAgentLoginMutation` (Agent ID + OTP), `useAgentLoginWithPhoneMutation` (phone + password), `useCreateAgentByManagerMutation` (invalidates agent list on success), `useRegisterAgentMutation`, `useSubmitFarmerApplicationMutation`, `useUpdateAgentStatusMutation` (invalidates agent list on success), `useUpdateApplicationStatusMutation` (invalidates application list on success), `useManagerOtpMutation`, `useVerifyManagerOtpMutation`, `useGetApplicationByAckNumberQuery`. All hooks must correctly parse backend variant/option responses.",
+      "reqIds": [
+        "REQ-34"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-restore-the-earthy-green-and-warm-amber-color-palette-across-all-frontend-pages-every-screen-agentsignup-agentlogin-agentdashboard-submitfarmerekyc-acknowledgmentscreen-checkapplicationstatus-managerlogin-managerdashboard-agentapproval-farmerapplicationapproval-and-createagentaccount-must-use-rich-saturated-earthy-greens-e-g-deep-forest-green-olive-sage-and-warm-ambers-e-g-golden-yellow-burnt-orange-honey-as-primary-and-accent-colors-buttons-headers-cards-badges-navigation-bar-form-labels-and-status-indicators-must-all-reflect-this-vibrant-palette-the-app-must-look-colorful-and-visually-rich-not-muted-or-monochrome",
+      "title": "Restore the earthy green and warm amber color palette across all frontend pages. Every screen — AgentSignup, AgentLogin, AgentDashboard, SubmitFarmerEKYC, AcknowledgmentScreen, CheckApplicationStatus, ManagerLogin, ManagerDashboard, AgentApproval, FarmerApplicationApproval, and CreateAgentAccount — must use rich, saturated earthy greens (e.g. deep forest green, olive, sage) and warm ambers (e.g. golden yellow, burnt orange, honey) as primary and accent colors. Buttons, headers, cards, badges, navigation bar, form labels, and status indicators must all reflect this vibrant palette. The app must look colorful and visually rich, not muted or monochrome.",
+      "reqIds": [
+        "REQ-35"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-frontend-src-index-css-and-frontend-tailwind-config-js-to-define-vivid-saturated-oklch-or-hsl-color-token-values-for-the-earthy-green-primary-and-warm-amber-accent-palette-ensure-that-css-custom-properties-map-to-rich-distinguishable-colors-not-near-white-or-near-grey-variants-so-that-all-pages-inheriting-these-tokens-appear-colorful",
+      "title": "Update `frontend/src/index.css` and `frontend/tailwind.config.js` to define vivid, saturated OKLCH or HSL color token values for the earthy green (primary) and warm amber (accent) palette. Ensure that CSS custom properties map to rich, distinguishable colors (not near-white or near-grey variants) so that all pages inheriting these tokens appear colorful.",
+      "reqIds": [
+        "REQ-36"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Agent Signup screen with pending status after signup",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Agent Login screen (only accessible after manager approval)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Agent Dashboard screen",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Farmer EKYC Form screen (Farmer Name, Mobile, Address, Aadhaar/PAN, etc.)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Document Upload screen (Identity Proof, Address Proof, Supporting docs)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-6",
+      "summary": "Instant Acknowledgment screen showing randomly generated 14-digit acknowledgment number on form submission",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-7",
+      "summary": "Application Status Check screen using acknowledgment number (Pending/Approved/Rejected)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-8",
+      "summary": "Manager Dashboard screen",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-9",
+      "summary": "Agent Approval screen for manager to approve/reject agent signup requests",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-10",
+      "summary": "Farmer Application Approval screen for manager to review and approve/reject farmer eKYC applications",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-11",
+      "summary": "Implement a Motoko backend actor that stores and manages: (a) Agent accounts with fields: id, name, mobile, email, password hash, status (pending/approved/rejected); (b) Farmer EKYC applications with fields: acknowledgmentNumber (14-digit random string), agentId, farmerName, mobile, address, aadhaarNumber, panNumber, otherDetails, documentReferences (array of filenames/labels), status (pending/approved/rejected), submittedAt timestamp; (c) A hardcoded manager credential for login. Expose query and update functions for: agent signup, agent login, get agent by id, list all agents (manager), approve/reject agent, submit farmer eKYC application, get application by acknowledgment number, list all applications (manager), approve/reject application.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-12",
+      "summary": "Manager login via OTP: fixed manager email is sansubasu34@gmail.com; manager authenticates using OTP (not password); only one active manager session allowed at a time",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-13",
+      "summary": "Update the backend to support OTP-based manager authentication: store the fixed manager email as 'sansubasu34@gmail.com', generate a 6-digit numeric OTP when requested, store it server-side with a short expiry (5 minutes), enforce that only one active manager session exists at a time (any new OTP request or successful login invalidates the previous session), and expose two functions: requestManagerOtp(email: Text) which validates the email matches the fixed manager email and returns the OTP (for demo purposes return it directly or log it since email sending is not supported), and verifyManagerOtp(email: Text, otp: Text) which validates the OTP and returns a session token on success.",
+      "reqIds": [
+        "REQ-13"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-14",
+      "summary": "OTP for manager login must be fixed as '123456' and must not be displayed on screen (no demo OTP display)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-15",
+      "summary": "Update the backend manager OTP logic so that the generated OTP is always the fixed value '123456' instead of a randomly generated code. The OTP must still be stored server-side with its expiry and validated normally via verifyManagerOtp.",
+      "reqIds": [
+        "REQ-15"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-16",
+      "summary": "Fix the backend agent registration logic so that newly signed-up agents are correctly persisted in stable state and are immediately visible in the manager's agent list. Audit the `registerAgent` (or equivalent) update function in `backend/main.mo` to ensure agents are written to stable storage (not a transient variable that resets on upgrade), and that the `listAllAgents` query function returns all stored agents without filtering or pagination errors.",
+      "reqIds": [
+        "REQ-17"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-17",
+      "summary": "Audit and fix the backend `registerAgent` function in `backend/main.mo` to ensure newly registered agents are written to stable storage (not a transient variable). The agent HashMap or equivalent stable structure must persist across canister upgrades. Verify that `listAllAgents` returns all stored agents without filtering, pagination, or stale-reference bugs.",
+      "reqIds": [
+        "REQ-19"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-18",
+      "summary": "Audit and fix the backend `main.mo` actor to ensure all agent registrations, agent status updates (approve/reject), farmer eKYC application submissions, and application status updates are stored exclusively in stable variables (e.g., stable HashMap or equivalent) that persist across canister upgrades and are accessible from any device or browser.",
+      "reqIds": [
+        "REQ-21"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-20",
+      "summary": "Update the backend `main.mo` to expose all necessary query and update functions required by the refactored frontend: `registerAgent`, `agentLogin` (returns agent record or error), `getAgentById`, `listAllAgents`, `updateAgentStatus` (approve/reject), `submitFarmerApplication`, `getApplicationByAckNumber`, `listAllApplications`, `updateApplicationStatus` (approve/reject). Ensure each function has appropriate access control (manager-only for list/approve/reject operations).",
+      "reqIds": [
+        "REQ-23"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-21",
+      "summary": "Replace agent password-based login with OTP-based login: agent enters their Agent ID and a fixed OTP ('696900') to authenticate. Backend must validate the Agent ID exists, is approved, and the OTP matches '696900' before allowing login.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-22",
+      "summary": "Update the backend `agentLogin` function in `backend/main.mo` so that it accepts an Agent ID and an OTP string instead of email and password. The function must validate: (1) an agent with the given Agent ID exists, (2) the agent's status is 'approved', and (3) the provided OTP exactly equals the fixed value '696900'. Return the agent record on success, or a descriptive error on failure (agent not found, account pending, account rejected, or incorrect OTP).",
+      "reqIds": [
+        "REQ-24"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-23",
+      "summary": "Add an alternative agent login method: agents can log in using their registered phone number (e.g., 6901644931) and a password (e.g., PRASANTA@2026) in addition to the existing Agent ID + OTP login. Backend must validate phone number and password credentials and return the agent record on success.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-24",
+      "summary": "Update the backend `agentLogin` function (or add a new `agentLoginWithPhone` function) in `backend/main.mo` to accept a phone number and a plain-text password as an alternative authentication method. The function must: (1) find an agent whose registered mobile number matches the provided phone number, (2) verify the agent's status is 'approved', (3) validate that the provided password matches the stored credential for that agent (the hardcoded phone-based credential is phone number '6901644931' with password 'PRASANTA@2026', but the logic must work generically against stored agent records), and (4) return the agent record on success or a descriptive error on failure (agent not found, account pending, account rejected, or incorrect password).",
+      "reqIds": [
+        "REQ-27"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-25",
+      "summary": "Add a 'Create Agent Account' feature on the Manager Dashboard/panel, allowing the manager to create new Agent (AID) accounts directly and provide the credentials to the agent for login.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-26",
+      "summary": "Add a `createAgentByManager` update function to `backend/main.mo` that allows the manager to create a new agent account directly. The function must accept: full name, mobile number, email, and an optional password. It must generate a unique Agent ID, hash the password (or assign a default password), set the agent status to 'approved' immediately (bypassing the pending approval flow), store the agent in stable storage, and return the new agent record including the generated Agent ID.",
+      "reqIds": [
+        "REQ-29"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-27",
+      "summary": "Rebuild the full backend `backend/main.mo` Motoko actor ensuring all stable storage, agent management, OTP logic, and farmer application functions are correctly implemented and persist across canister upgrades. All agent registrations, status updates, farmer eKYC applications, and application status updates must be stored in stable variables. Expose: `registerAgent`, `agentLogin` (Agent ID + fixed OTP '696900'), `agentLoginWithPhone` (phone number + stored password), `createAgentByManager` (manager creates approved agent directly), `getAgentById`, `listAllAgents`, `updateAgentStatus`, `submitFarmerApplication`, `getApplicationByAckNumber`, `listAllApplications`, `updateApplicationStatus`. Manager OTP authentication uses fixed email 'sansubasu34@gmail.com' and fixed OTP '123456' via `requestManagerOtp` and `verifyManagerOtp`. Single active manager session enforced.",
+      "reqIds": [
+        "REQ-32"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-28",
+      "summary": "Restore colorful earthy green and warm amber visual theme across all screens (as it was before)",
+      "reqIds": [],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "Farmer EKYC",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

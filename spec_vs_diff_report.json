@@ -1,0 +1,28 @@
+{
+  "kind": "spec_vs_diff_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-24T17:44:20.334Z",
+  "summary": "The diff implements both REQ-35 and REQ-36 comprehensively. All 11 required pages have been updated with earthy green (primary) and warm amber (accent) colors. The index.css defines vivid OKLCH color tokens and tailwind.config.js maps them to utility classes. The navigation bar uses bg-primary with amber/white text, buttons use saturated green/amber fills, cards have colored header bands, status badges use distinct vivid colors, form fields use green focus states, and Manager Dashboard stat cards use colorful backgrounds. Dark mode tokens are also defined with saturated variants.",
+  "missing_requirements": [],
+  "hallucinated_features": [],
+  "confidence": 0.92,
+  "changed_files": [
+    "frontend-file-summaries.txt",
+    "frontend/src/components/Layout.tsx",
+    "frontend/src/components/StatusBadge.tsx",
+    "frontend/src/index.css",
+    "frontend/src/pages/AcknowledgmentScreen.tsx",
+    "frontend/src/pages/AgentApproval.tsx",
+    "frontend/src/pages/AgentDashboard.tsx",
+    "frontend/src/pages/AgentLogin.tsx",
+    "frontend/src/pages/AgentSignup.tsx",
+    "frontend/src/pages/CheckApplicationStatus.tsx",
+    "frontend/src/pages/CreateAgentAccount.tsx",
+    "frontend/src/pages/FarmerApplicationApproval.tsx",
+    "frontend/src/pages/ManagerDashboard.tsx",
+    "frontend/src/pages/ManagerLogin.tsx",
+    "frontend/src/pages/SubmitFarmerEKYC.tsx",
+    "frontend/tailwind.config.js",
+    "project_state.json"
+  ]
+}

@@ -1,0 +1,110 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Restore colorful earthy green and warm amber visual theme",
+  "requirements": [
+    {
+      "id": "REQ-36",
+      "summary": "Define vivid, saturated OKLCH color tokens for earthy green (primary) and warm amber (accent) palette in global styling files",
+      "acceptanceCriteria": [
+        "`--primary` or equivalent CSS token resolves to a deep, saturated green visible on white backgrounds.",
+        "`--accent` or equivalent CSS token resolves to a vivid amber/golden color.",
+        "Tailwind config extends theme with these tokens so utility classes like `bg-primary`, `text-accent`, `border-primary` produce colorful results.",
+        "Dark-mode tokens (if defined) also use saturated variants of the same palette."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/index.css",
+          "operation": "modify",
+          "description": "Replace existing OKLCH color token values with vivid, saturated earthy green (primary) and warm amber (accent) colors. Update --primary to a deep forest green (e.g., OKLCH 0.45 0.15 150), --accent to a golden amber (e.g., OKLCH 0.70 0.15 70), and ensure all semantic tokens (--background, --foreground, --muted, --card, --border) use rich, distinguishable values. Apply the same palette to dark mode variants with adjusted lightness for visibility."
+        },
+        {
+          "path": "frontend/tailwind.config.js",
+          "operation": "modify",
+          "description": "Extend the theme colors section to map CSS custom properties (--primary, --accent, etc.) to Tailwind utility classes. Ensure bg-primary, text-primary, border-primary, bg-accent, text-accent produce vivid green and amber colors respectively. Add additional semantic color mappings (muted, card, border) that reference the updated OKLCH tokens from index.css."
+        }
+      ]
+    },
+    {
+      "id": "REQ-35",
+      "summary": "Apply the restored earthy green and warm amber color palette across all frontend pages and components",
+      "acceptanceCriteria": [
+        "The top navigation bar uses a rich earthy green background with contrasting amber or white text.",
+        "Primary action buttons use saturated green or amber fill colors, not grey or white.",
+        "Card containers have visible colored borders or colored header bands using the green/amber palette.",
+        "Status badges (Pending, Approved, Rejected) are rendered in distinct, vivid colors (e.g. amber for pending, green for approved, red for rejected).",
+        "Form field focus states and labels use green or amber accent colors.",
+        "The Manager Dashboard stat cards use colorful backgrounds or colored icons from the earthy green/amber palette.",
+        "All pages are visually consistent with each other using the same color tokens.",
+        "No page appears grey, white-only, or colorless."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/Layout.tsx",
+          "operation": "modify",
+          "description": "Update the header/navigation bar to use a rich earthy green background (bg-primary or a saturated green shade) with contrasting white or amber text. Ensure the logout button uses an amber or green accent color for visual richness."
+        },
+        {
+          "path": "frontend/src/components/StatusBadge.tsx",
+          "operation": "modify",
+          "description": "Update badge styling to use vivid, distinct colors: amber/golden yellow for pending status, saturated green for approved, and red for rejected. Ensure each badge stands out visually using the restored palette."
+        },
+        {
+          "path": "frontend/src/pages/AgentSignup.tsx",
+          "operation": "modify",
+          "description": "Apply colorful styling: use green or amber borders on the form card, green/amber labels and focus states for input fields, and a saturated green or amber primary button for the 'Register Agent' action. Ensure the page is visually rich, not monochrome."
+        },
+        {
+          "path": "frontend/src/pages/AgentLogin.tsx",
+          "operation": "modify",
+          "description": "Apply colorful styling: use green or amber borders on the card and tab selectors, green/amber focus states on inputs, and saturated green or amber primary buttons for 'Login with Agent ID' and 'Login with Phone'. Ensure tabs and buttons reflect the earthy green/amber palette."
+        },
+        {
+          "path": "frontend/src/pages/AgentDashboard.tsx",
+          "operation": "modify",
+          "description": "Apply colorful styling: use green or amber header bands or colored borders on the welcome banner and action cards. Ensure quick-action cards use colorful icons or backgrounds from the green/amber palette. Make the dashboard visually vibrant."
+        },
+        {
+          "path": "frontend/src/pages/SubmitFarmerEKYC.tsx",
+          "operation": "modify",
+          "description": "Apply colorful styling: use green or amber borders on the form card, green/amber labels and focus states for all input fields, and a saturated green or amber primary button for 'Submit eKYC Application'. Ensure the form is visually rich and consistent with the palette."
+        },
+        {
+          "path": "frontend/src/pages/AcknowledgmentScreen.tsx",
+          "operation": "modify",
+          "description": "Apply colorful styling: use a green or amber header band or colored border on the acknowledgment card, and green/amber accent colors for action buttons ('Submit Another Application', 'Check Application Status'). Ensure the acknowledgment number display is visually prominent."
+        },
+        {
+          "path": "frontend/src/pages/CheckApplicationStatus.tsx",
+          "operation": "modify",
+          "description": "Apply colorful styling: use green or amber borders on the search card and application details card, green/amber focus states on the input field, and a saturated green or amber primary button for 'Check Status'. Ensure the displayed application details use the StatusBadge with vivid colors."
+        },
+        {
+          "path": "frontend/src/pages/ManagerLogin.tsx",
+          "operation": "modify",
+          "description": "Apply colorful styling: use green or amber borders on the login card, green/amber focus states on inputs, and saturated green or amber primary buttons for 'Request OTP' and 'Verify OTP'. Ensure the manager login page is visually consistent with the earthy green/amber palette."
+        },
+        {
+          "path": "frontend/src/pages/ManagerDashboard.tsx",
+          "operation": "modify",
+          "description": "Apply colorful styling: use colorful backgrounds or colored icons on stat cards (total/pending agents and applications) using the green/amber palette. Apply green or amber borders or header bands to navigation cards. Ensure the dashboard is visually rich and vibrant."
+        },
+        {
+          "path": "frontend/src/pages/AgentApproval.tsx",
+          "operation": "modify",
+          "description": "Apply colorful styling: use green or amber borders on the agent list card, green/amber buttons for 'Approve' and 'Reject' actions, and ensure the status badges use vivid colors. Make the agent list visually consistent with the restored palette."
+        },
+        {
+          "path": "frontend/src/pages/FarmerApplicationApproval.tsx",
+          "operation": "modify",
+          "description": "Apply colorful styling: use green or amber borders on the application list card, green/amber buttons for 'Approve' and 'Reject' actions, and ensure the status badges use vivid colors. Make the application list visually rich and consistent with the earthy green/amber palette."
+        },
+        {
+          "path": "frontend/src/pages/CreateAgentAccount.tsx",
+          "operation": "modify",
+          "description": "Apply colorful styling: use green or amber borders on the form card, green/amber labels and focus states for input fields, and a saturated green or amber primary button for 'Create Agent Account'. Ensure the success message and copy-to-clipboard button use accent colors from the palette."
+        }
+      ]
+    }
+  ]
+}
